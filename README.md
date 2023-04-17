@@ -24,7 +24,45 @@ Pandas, pathlib, and matplotlib are all utilized in this script.
 
 [To learn more about Matplotlib](https://matplotlib.org/)
 
+---
 
+## Installation Guide:
+
+The `crypto_arbitrage` script begins with adding the following libraries:
+
+```python
+import pandas as pd
+from pathlib import Path 
+%matplotlib inline
+```
+
+---
+
+## Usage:
+
+# 1. Collect the Data
+
+Using Pandas `read_csv` function, import the data. Set the Datetimeindex as Timestamp and parse and format the dates.
+
+```python
+# bistamp.csv
+
+bitstamp = pd.read_csv(
+    Path('Resources/bitstamp.csv'),
+    index_col = 'Timestamp',
+    parse_dates = True,
+    infer_datetime_format = True)
+
+# coinbase.csv
+
+coinbase = pd.read_csv(
+    Path('Resources/coinbase.csv'),
+    index_col = "Timestamp",
+    parse_dates = True,
+    infer_datetime_format = True)
+```
+
+# 2. Prepare the Data
 
 ---
 
