@@ -64,6 +64,46 @@ coinbase = pd.read_csv(
 
 # 2. Prepare the Data
 
+To further prepare the data for analysis, the script cleans the data by removing the "$" in the Close column, coverts the Close column to a float type, drop any NaN values in all columns, and drops and duplicated values.
+
+# 3. Analyze the Data 
+
+The analysis for this arbitrage trade will only consists of the closing price. To do this, the script uses the .loc function.
+
+```python
+bitstamp_sliced = bitstamp.loc[:,"Close"]
+
+coinbase_sliced = coinbase.loc[:,"Close"]
+```
+
+Next, a summary of the statistics can be viewed: 
+
+```python
+
+bitstamp_sliced.describe()
+
+coinbase_sliced.describe()
+```
+
+Plotting the overlay of the two closing prices gives a visual presentation of areas that might be of interest for the arbitrage trade. To do this, consider the following code.
+
+```python
+coinbase_sliced.plot(
+    legend = True, 
+    figsize=(15,10),
+    title = "Coinbase vs Bitstamp", 
+    color = "blue",
+    label = "Coinbase"
+)
+bitstamp_sliced.plot(
+    legend = True, 
+    figsize=(15,10),
+    color="orange",
+    label="Bitstamp"
+)
+```
+
+Seperating the code by focusing on 
 ---
 
 ## Citations: 
