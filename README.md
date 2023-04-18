@@ -102,10 +102,10 @@ bitstamp_sliced.plot(
     label="Bitstamp"
 )
 ```
-![Plot overlay]("../stat_arbitrage.png")
+![Plot overlay](stat_arbitrage.png)
 
 
-Seperating the code by focusing on specific days will enhance the visual presentation of the spread between the two exhanges, coinbase and bitstamp. 
+Separating the code by focusing on specific days will enhance the visual presentation of the spread between the two exhanges, coinbase and bitstamp. 
 
 The three dates of interest for a possible arbitrage include: 01/16/2018, 02/05/2018, and 03/14/2018. 
 ---
