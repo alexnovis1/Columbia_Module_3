@@ -111,6 +111,11 @@ Next, focusing on specific days will enhance the visual presentation of the spre
 
 As an example, the three dates of interest for a possible arbitrage include: 01/16/2018, 02/05/2018, and 03/14/2018. 
 
+>Side Note: For the purposes of this example, the early period (01/16/2018) will be used for the remainder of this educational README.
+
+# 4. Calculate the Arbitrage Profits
+
+
 
 ---
 
