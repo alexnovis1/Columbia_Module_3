@@ -1,4 +1,4 @@
-### Columbia_Module_3
+# Columbia_Module_3
 
 ## Introduction:
 
@@ -26,6 +26,11 @@ Pandas, pathlib, and matplotlib are all utilized in this script.
 
 ---
 
+## Resources: 
+
+[Resources Folder](/Resources/)
+[Arbitrage Code](/crypto_arbitrage.ipynb)
+
 ## Installation Guide:
 
 The `crypto_arbitrage` script begins with adding the following libraries:
@@ -40,7 +45,7 @@ from pathlib import Path
 
 ## Usage:
 
-# 1. Collect the Data
+### 1. Collect the Data
 
 Using Pandas `read_csv` function, import the data. Set the Datetimeindex as Timestamp and parse and format the dates.
 
@@ -62,11 +67,11 @@ coinbase = pd.read_csv(
     infer_datetime_format = True)
 ```
 
-# 2. Prepare the Data
+### 2. Prepare the Data
 
 To further prepare the data for analysis, the script cleans the data by removing the "$" in the Close column, coverts the Close column to a float type, drop any NaN values in all columns, and drops and duplicated values.
 
-# 3. Analyze the Data 
+### 3. Analyze the Data 
 
 The analysis for this arbitrage trade will only consists of the closing price. To do this, the script uses the .loc function.
 
@@ -109,13 +114,58 @@ bitstamp_sliced.plot(
 
 Next, focusing on specific days will enhance the visual presentation of the spread between the two exhanges, coinbase and bitstamp. This will allow you to pick specific dates.
 
+### 4. Focus your Analysis on Specific Dates 
+
 As an example, the three dates of interest for a possible arbitrage include: 01/16/2018, 02/05/2018, and 03/14/2018. 
 
 >Side Note: For the purposes of this example, the early period (01/16/2018) will be used for the remainder of this educational README.
 
-# 4. Calculate the Arbitrage Profits
+Subtracting the closing price on a given day between the two exchanges will give a delta that we can use to pull up basic statistics to determine if this period of time has a suitable spread of price that could be used for the arbitrage trade. Using the `describe()` function will generate the statistics. Using a box plot will allow to visualize if there are a suitable amount of outlier tails to be profitable on this day.
 
+Analyzing the box plot below, it can be easily shown that there is a wide spread given the amount of outliers. 
 
+![Early Box Plot](/Pictures/early_box_plot.png)
+
+### 5. Calculate the Arbitrage Profits 
+
+To begin, measure the arbitrage spread between the two exchanges by subtracting the lower-priced exchange from the higher-priced exchange. Then by creating a conditional statement where the spread is greater than zero will allow the script to focus on only the profitable trades. 
+
+```python
+# Subtract the lower priced exchange from the higher priced exchange
+arbitrage_spread_early = bitstamp_sliced['2018-01-16'] - coinbase_sliced['2018-01-16']
+
+# create a conditional statement to only keep values where the spread is greater than zero
+arb_spread_early = arbitrage_spread_early[arbitrage_spread_early > 0]
+```
+Next, the script divides the instances that have a positive arbitrage spread by the Bitcoin from the lower exchange that you would like to buy (that is the exchange with the lower price)
+
+```python
+spread_return_early = arb_spread_early / coinbase_sliced.loc['2018-01-16']
+```
+
+To even further scope in on only the most profitable trades, the script will return anything that exceeds over 1% in profit which is the minimum threshold needed to cover the costs in this example. 
+
+```python
+profitable_trades_middle = spread_return_middle[spread_return_middle > 0.01]
+```
+
+Now the script can analyze calculate the potential profit, in dollars, per trade. 
+
+```python
+profit_early = profitable_trades_early * coinbase_sliced.loc['2018-01-16']
+```
+
+![Profit Per Trade](/Pictures/profit_per_trade.png)
+
+Lastly, the cumulative profits can be determined as such:
+
+```python
+cumulative_profit_early = profit_per_trade_early.cumsum()
+```
+
+A plot of this visually shows how profitable (or not) this trade is. 
+
+![Cumulative Sum](/Pictures/cumulative_profit_early.png)
 
 ---
 
