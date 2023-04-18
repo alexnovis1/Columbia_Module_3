@@ -29,6 +29,7 @@ Pandas, pathlib, and matplotlib are all utilized in this script.
 ## Resources: 
 
 [Resources Folder](/Resources/)
+
 [Arbitrage Code](/crypto_arbitrage.ipynb)
 
 ## Installation Guide:
@@ -146,7 +147,7 @@ spread_return_early = arb_spread_early / coinbase_sliced.loc['2018-01-16']
 To even further scope in on only the most profitable trades, the script will return anything that exceeds over 1% in profit which is the minimum threshold needed to cover the costs in this example. 
 
 ```python
-profitable_trades_middle = spread_return_middle[spread_return_middle > 0.01]
+profitable_trades_early = spread_return_early[spread_return_early > 0.01]
 ```
 
 Now the script can analyze calculate the potential profit, in dollars, per trade. 
@@ -168,6 +169,11 @@ A plot of this visually shows how profitable (or not) this trade is.
 ![Cumulative Sum](/Pictures/cumulative_profit_early.png)
 
 ---
+
+## Contributors: 
+
+Alex Novis 
+Columbia Fintech Bootcamp
 
 ## Citations: 
 
